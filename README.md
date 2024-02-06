@@ -6,11 +6,10 @@ Distributing Anaconda installer, shim and bootloader via container registries.
 
 To pull Anaconda files:
 
-    # oras pull ghcr.io/lzap/bootc-netboot-example:rhel-9.3.0-x86_64
+    oras pull ghcr.io/lzap/bootc-netboot-example:rhel-9.3.0-x86_64
 
-The contents is:
+The contents is (`ls` output):
 
-    # ls
     vmlinuz
     initrd.img
     shim.efi
@@ -18,13 +17,13 @@ The contents is:
 
 Before executing binaries, signature must be verified:
 
-    # cosign verify --key cosign.pub ghcr.io/lzap/bootc-netboot-example:rhel-9.3.0-x86_64
+    cosign verify --key cosign.pub ghcr.io/lzap/bootc-netboot-example:rhel-9.3.0-x86_64
 
 ## Publish
 
 Login to the registry:
 
-    # oras login ghcr.io
+    oras login ghcr.io
 
 The example will use the following environment variables:
 
@@ -33,15 +32,21 @@ The example will use the following environment variables:
 
 Upload new artifacts:
 
-    # pushd rhel-9.3.0-x86_64
-    # oras push ghcr.io/lzap/bootc-netboot-example:rhel-9.3.0-x86_64 \
+    pushd rhel-9.3.0-x86_64
+
+    oras push ghcr.io/lzap/bootc-netboot-example:rhel-9.3.0-x86_64 \
         --annotation-file ../annotations.json \
         --config ../empty.json:application/vnd.oci.empty.v1+json \
-        --artifact-type $ARTIFACT_TYPE vmlinuz:$MEDIA_TYPE initrd.img:$MEDIA_TYPE
-    # popd
+        --artifact-type $ARTIFACT_TYPE \
+        vmlinuz:$MEDIA_TYPE \
+        initrd.img:$MEDIA_TYPE \
+        shim.efi:$MEDIA_TYPE \
+        grubaa64.efi:$MEDIA_TYPE
+
+    popd
 
 Sign the artifacts:
 
-    # cosign sign --key cosign.key -y ghcr.io/lzap/bootc-netboot-example:rhel-9.3.0-x86_64
+    cosign sign --key cosign.key -y ghcr.io/lzap/bootc-netboot-example:rhel-9.3.0-x86_64
 
 That is all.
