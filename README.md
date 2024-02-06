@@ -1,4 +1,4 @@
-# Bifrost Anaconda PXE files
+# Anaconda PXE files for bootc
 
 Distributing Anaconda installer, shim and bootloader via container registries.
 
