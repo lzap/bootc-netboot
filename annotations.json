@@ -1,0 +1,23 @@
+{
+	"$config": {
+		"org.opencontainers.image.description": "Anaconda installer bootloader and Linux kernel/initrd. Usage: oras pull ghcr.io/lzap/bootc-netboot-example:TAG"
+	},
+	"$manifest": {
+		"org.opencontainers.image.description": "Anaconda installer bootloader and Linux kernel/initrd. Usage: oras pull ghcr.io/lzap/bootc-netboot-example:TAG"
+	},
+	"vmlinuz": {
+		"org.opencontainers.image.description": "Anaconda installer Linux kernel"
+	},
+	"initrd.img": {
+		"org.opencontainers.image.description": "Anaconda installer init RAM disk"
+	},
+	"shim.efi": {
+		"org.opencontainers.image.description": "SecureBoot shim EFI binary"
+	},
+	"grubx64.efi": {
+		"org.opencontainers.image.description": "Grub bootloader binary"
+	},
+	"grubia64.efi": {
+		"org.opencontainers.image.description": "Grub bootloader binary"
+	}
+}
